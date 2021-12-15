@@ -1,4 +1,5 @@
 import 'package:bloc_chop/cubit/post_cubit.dart';
+import 'package:bloc_chop/cubit/theta_basic_cubit.dart';
 import 'package:bloc_chop/service/placeholder_service.dart';
 import 'package:flutter/material.dart';
 import 'package:chopper/chopper.dart';
@@ -15,15 +16,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: BlocProvider(
-        create: (context) => PostCubit(),
+        create: (context) => ThetaBasicCubit(),
         child: Scaffold(
-          body: BlocBuilder<PostCubit, PostState>(
+          body: BlocBuilder<ThetaBasicCubit, ThetaBasicState>(
             builder: (context, state) {
               Widget responseWidget = Container();
-              if (state is PostInitial) {
+              if (state is ThetaBasicInitial) {
                 responseWidget = Text(state.responseText);
-              } else if (state is PostsLoaded) {
-                responseWidget = Text(state.postList.toString());
+              } else if (state is ThetaBasicLoaded) {
+                responseWidget = Text(state.responseText);
               }
 
               return Column(
@@ -36,9 +37,9 @@ class MyApp extends StatelessWidget {
                       child: Row(
                         children: [
                           ElevatedButton(
-                            child: const Text('posts'),
+                            child: const Text('info'),
                             onPressed: () async {
-                              context.read<PostCubit>().getPost();
+                              context.read<ThetaBasicCubit>().thetaInfo();
                             },
                           ),
                         ],
