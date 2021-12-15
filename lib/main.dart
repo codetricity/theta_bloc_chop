@@ -1,16 +1,13 @@
-import 'package:bloc_chop/cubit/post_cubit.dart';
 import 'package:bloc_chop/cubit/theta_basic_cubit.dart';
-import 'package:bloc_chop/service/placeholder_service.dart';
 import 'package:flutter/material.dart';
-import 'package:chopper/chopper.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +19,11 @@ class MyApp extends StatelessWidget {
             builder: (context, state) {
               Widget responseWidget = Container();
               if (state is ThetaBasicInitial) {
-                responseWidget = Text(state.responseText);
+                responseWidget = SingleChildScrollView(
+                    child: SelectableText(state.responseText));
               } else if (state is ThetaBasicLoaded) {
-                responseWidget = Text(state.responseText);
+                responseWidget = SingleChildScrollView(
+                    child: SelectableText(state.responseText));
               }
 
               return Column(
@@ -35,11 +34,18 @@ class MyApp extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           ElevatedButton(
                             child: const Text('info'),
                             onPressed: () async {
                               context.read<ThetaBasicCubit>().thetaInfo();
+                            },
+                          ),
+                          ElevatedButton(
+                            child: const Text('state'),
+                            onPressed: () async {
+                              context.read<ThetaBasicCubit>().thetaState();
                             },
                           ),
                         ],
