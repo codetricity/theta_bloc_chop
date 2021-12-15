@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(bloc_chop LANGUAGES CXX)
+project(theta_bloc_chop LANGUAGES CXX)
 
-set(BINARY_NAME "bloc_chop")
+set(BINARY_NAME "theta_bloc_chop")
 
 cmake_policy(SET CMP0063 NEW)
 

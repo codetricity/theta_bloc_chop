@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:bloc_chop/service/theta_basic_service.dart';
+import 'package:theta_bloc_chop/service/theta_basic_service.dart';
 import 'package:chopper/chopper.dart';
 import 'package:equatable/equatable.dart';
 

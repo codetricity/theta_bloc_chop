@@ -1,6 +1,6 @@
-# BLoC and chopper example
+# RICOH THETA BLoC and chopper example
 
-Using cubits to manage state and chopper to get data from a RICOH THETA
+Use cubits to manage state and chopper to get data from a RICOH THETA
 camera.
 
 ![screenshot](readme_assets/screenshot_2021_12_15.png)
