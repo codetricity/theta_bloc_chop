@@ -48,6 +48,12 @@ class MyApp extends StatelessWidget {
                               context.read<ThetaBasicCubit>().thetaState();
                             },
                           ),
+                          ElevatedButton(
+                            child: const Text('take pict'),
+                            onPressed: () async {
+                              context.read<ThetaBasicCubit>().takePicture();
+                            },
+                          ),
                         ],
                       ),
                     ),

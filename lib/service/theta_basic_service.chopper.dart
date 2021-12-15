@@ -37,4 +37,17 @@ class _$ThetaBasicService extends ThetaBasicService {
     final $request = Request('POST', $url, client.baseUrl, headers: $headers);
     return client.send<dynamic, dynamic>($request);
   }
+
+  @override
+  Future<Response<dynamic>> thetaCommand(Map<String, dynamic> body) {
+    final $url = '/osc/commands/execute';
+    final $headers = {
+      'Content-Type': 'application/json;charset=utf-8',
+    };
+
+    final $body = body;
+    final $request =
+        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
+    return client.send<dynamic, dynamic>($request);
+  }
 }

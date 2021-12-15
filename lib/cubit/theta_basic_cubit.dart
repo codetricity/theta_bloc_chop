@@ -25,4 +25,11 @@ class ThetaBasicCubit extends Cubit<ThetaBasicState> {
     var response = await thetaBasicService.thetaState();
     emit(ThetaBasicLoaded(response.body.toString()));
   }
+
+  void takePicture() async {
+    final thetaBasicService = chopper.getService<ThetaBasicService>();
+    var response =
+        await thetaBasicService.thetaCommand({'name': 'camera.takePicture'});
+    emit(ThetaBasicLoaded(response.body.toString()));
+  }
 }
