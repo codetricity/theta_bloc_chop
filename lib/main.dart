@@ -1,7 +1,9 @@
-import 'package:panorama/panorama.dart';
 import 'package:theta_bloc_chop/cubit/theta_basic_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'view/info_button.dart';
+import 'view/pano_viewer.dart';
+import 'view/state_button.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,24 +21,9 @@ class MyApp extends StatelessWidget {
         child: Scaffold(
           body: BlocBuilder<ThetaBasicCubit, ThetaBasicState>(
             builder: (context, state) {
-              double screenwidth = MediaQuery.of(context).size.width;
-
-              double panowidth = screenwidth;
-              double bufferwidth = 50;
-              if (screenwidth > 600 && screenwidth < 900) {
-                panowidth = screenwidth * .7;
-                bufferwidth = 150;
-              } else if (screenwidth >= 900 && screenwidth < 1200) {
-                panowidth = screenwidth * .6;
-                bufferwidth = screenwidth / 5;
-              } else if (screenwidth >= 1200) {
-                panowidth = screenwidth * .5;
-                bufferwidth = screenwidth / 4;
-              }
               Widget responseWidget = Container();
               if (state is ThetaBasicInitial) {
-                responseWidget = SingleChildScrollView(
-                    child: SelectableText(state.responseText));
+                responseWidget = SelectableText(state.responseText);
               } else if (state is ThetaBasicLoaded) {
                 responseWidget = SingleChildScrollView(
                     child: SelectableText(state.responseText));
@@ -47,43 +34,8 @@ class MyApp extends StatelessWidget {
               } else if (state is ThetaLoading) {
                 responseWidget = const CircularProgressIndicator();
               } else if (state is ResponseLoadedFullImage) {
-                responseWidget = Stack(children: [
-                  Column(
-                    children: [
-                      Expanded(
-                        flex: 3,
-                        child: Container(
-                          width: panowidth,
-                          height: double.infinity,
-                          child: Panorama(
-                            child: state.fullImage,
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: Container(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        width: bufferwidth,
-                        color: Colors.white,
-                      ),
-                      Container(
-                        width: bufferwidth,
-                        color: Colors.white,
-                      ),
-                    ],
-                  )
-                ]);
+                responseWidget = const PanoViewer();
               }
-
               return Column(
                 children: [
                   Expanded(flex: 4, child: responseWidget),
@@ -97,18 +49,8 @@ class MyApp extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              ElevatedButton(
-                                child: const Text('info'),
-                                onPressed: () async {
-                                  context.read<ThetaBasicCubit>().thetaInfo();
-                                },
-                              ),
-                              ElevatedButton(
-                                child: const Text('state'),
-                                onPressed: () async {
-                                  context.read<ThetaBasicCubit>().thetaState();
-                                },
-                              ),
+                              const InfoButton(),
+                              const StateButton(),
                               ElevatedButton(
                                 child: const Text('take pict'),
                                 onPressed: () async {
