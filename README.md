@@ -5,6 +5,10 @@ camera.
 
 ![screenshot](readme_assets/screenshot_2021_12_15.gif)
 
+Navigation with panorama.
+
+![navigation](readme_assets/navigation.gif)
+
 ## Development Tips
 
 To generate the service code:

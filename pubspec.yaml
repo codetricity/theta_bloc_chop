@@ -31,6 +31,7 @@ dependencies:
   chopper: ^4.0.4
   flutter_bloc: ^8.0.0
   equatable: ^2.0.3
+  panorama: ^0.4.1
 
 dev_dependencies:
   flutter_test:

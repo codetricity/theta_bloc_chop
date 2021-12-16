@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:theta_bloc_chop/data/theta_image.dart';
+import 'package:http/http.dart' as http;
 import 'package:theta_bloc_chop/service/theta_basic_service.dart';
 import 'package:chopper/chopper.dart';
 import 'package:equatable/equatable.dart';
@@ -16,6 +17,16 @@ class ThetaBasicCubit extends Cubit<ThetaBasicState> {
     services: [ThetaBasicService.create()],
     converter: const JsonConverter(),
   );
+
+  void getFullImage(String url) async {
+    emit(const ThetaLoading());
+    var response = await http.get(Uri.parse(url));
+
+    var imageBytes = response.bodyBytes;
+    emit(ResponseLoadedFullImage(Image.memory(imageBytes)));
+    Future.delayed(Duration.zero);
+    print('image loaded');
+  }
 
   ThetaBasicCubit() : super(const ThetaBasicInitial('camera response'));
 
@@ -58,7 +69,7 @@ class ThetaBasicCubit extends Cubit<ThetaBasicState> {
       InkWell imageContainer = InkWell(
         child: thumbnail,
         onTap: () {
-          // getFullImage(entry['fileUrl']);
+          getFullImage(entry['fileUrl']);
         },
       );
       thumbList.add(imageContainer);

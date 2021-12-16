@@ -19,6 +19,14 @@ class ThetaLoading extends ThetaBasicState {
   const ThetaLoading();
 }
 
+class ResponseLoadedFullImage extends ThetaBasicState {
+  final Image fullImage;
+  const ResponseLoadedFullImage(this.fullImage);
+
+  @override
+  List<Object> get props => [fullImage];
+}
+
 class ThetaBasicLoaded extends ThetaBasicState {
   final String responseText;
   const ThetaBasicLoaded(this.responseText);
