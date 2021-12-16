@@ -1,3 +1,4 @@
+import 'package:theta_bloc_chop/cubit/home_state.dart';
 import 'package:theta_bloc_chop/cubit/theta_basic_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,21 +24,7 @@ class MyApp extends StatelessWidget {
         child: Scaffold(
           body: BlocBuilder<ThetaBasicCubit, ThetaBasicState>(
             builder: (context, state) {
-              Widget responseWidget = Container();
-              if (state is ThetaBasicInitial) {
-                responseWidget = SelectableText(state.responseText);
-              } else if (state is ThetaBasicLoaded) {
-                responseWidget = SingleChildScrollView(
-                    child: SelectableText(state.responseText));
-              } else if (state is PictureListLoaded) {
-                responseWidget = ListView(
-                  children: state.imageList,
-                );
-              } else if (state is ThetaLoading) {
-                responseWidget = const CircularProgressIndicator();
-              } else if (state is ResponseLoadedFullImage) {
-                responseWidget = const PanoViewer();
-              }
+              Widget responseWidget = const HomeState();
               return Column(
                 children: [
                   Expanded(flex: 4, child: responseWidget),
