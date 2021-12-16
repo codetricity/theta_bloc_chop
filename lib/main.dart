@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'view/info_button.dart';
 import 'view/pano_viewer.dart';
 import 'view/state_button.dart';
+import 'view/take_picture_button.dart';
+import 'view/thumb_button.dart';
 
 void main() {
   runApp(const MyApp());
@@ -48,28 +50,16 @@ class MyApp extends StatelessWidget {
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              const InfoButton(),
-                              const StateButton(),
-                              ElevatedButton(
-                                child: const Text('take pict'),
-                                onPressed: () async {
-                                  context.read<ThetaBasicCubit>().takePicture();
-                                },
-                              ),
+                            children: const [
+                              InfoButton(),
+                              StateButton(),
+                              TakePictureButton(),
                             ],
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              ElevatedButton(
-                                child: const Text('thumbs'),
-                                onPressed: () async {
-                                  context
-                                      .read<ThetaBasicCubit>()
-                                      .getLastTenPictures();
-                                },
-                              ),
+                            children: const [
+                              ThumbButton(),
                             ],
                           )
                         ],
