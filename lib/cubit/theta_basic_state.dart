@@ -15,10 +15,22 @@ class ThetaBasicInitial extends ThetaBasicState {
   List<Object> get props => [responseText];
 }
 
+class ThetaLoading extends ThetaBasicState {
+  const ThetaLoading();
+}
+
 class ThetaBasicLoaded extends ThetaBasicState {
   final String responseText;
   const ThetaBasicLoaded(this.responseText);
 
   @override
   List<Object> get props => [responseText];
+}
+
+class PictureListLoaded extends ThetaBasicState {
+  final List<InkWell> imageList;
+  const PictureListLoaded(this.imageList);
+
+  @override
+  List<Object> get props => [imageList];
 }

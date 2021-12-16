@@ -25,6 +25,12 @@ class MyApp extends StatelessWidget {
               } else if (state is ThetaBasicLoaded) {
                 responseWidget = SingleChildScrollView(
                     child: SelectableText(state.responseText));
+              } else if (state is PictureListLoaded) {
+                responseWidget = ListView(
+                  children: state.imageList,
+                );
+              } else if (state is ThetaLoading) {
+                responseWidget = const CircularProgressIndicator();
               }
 
               return Column(
@@ -34,27 +40,45 @@ class MyApp extends StatelessWidget {
                     flex: 4,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Row(
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          ElevatedButton(
-                            child: const Text('info'),
-                            onPressed: () async {
-                              context.read<ThetaBasicCubit>().thetaInfo();
-                            },
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              ElevatedButton(
+                                child: const Text('info'),
+                                onPressed: () async {
+                                  context.read<ThetaBasicCubit>().thetaInfo();
+                                },
+                              ),
+                              ElevatedButton(
+                                child: const Text('state'),
+                                onPressed: () async {
+                                  context.read<ThetaBasicCubit>().thetaState();
+                                },
+                              ),
+                              ElevatedButton(
+                                child: const Text('take pict'),
+                                onPressed: () async {
+                                  context.read<ThetaBasicCubit>().takePicture();
+                                },
+                              ),
+                            ],
                           ),
-                          ElevatedButton(
-                            child: const Text('state'),
-                            onPressed: () async {
-                              context.read<ThetaBasicCubit>().thetaState();
-                            },
-                          ),
-                          ElevatedButton(
-                            child: const Text('take pict'),
-                            onPressed: () async {
-                              context.read<ThetaBasicCubit>().takePicture();
-                            },
-                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              ElevatedButton(
+                                child: const Text('thumbs'),
+                                onPressed: () async {
+                                  context
+                                      .read<ThetaBasicCubit>()
+                                      .getLastTenPictures();
+                                },
+                              ),
+                            ],
+                          )
                         ],
                       ),
                     ),
